@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 
 const Add = (props) => {
-   let emptyBook = { title: '', author: '', genre: '', year: '', publisher: ''}
+   let emptyBook = {title: '', author: '', genre: '', year: '', publisher: ''}
    const [book, setBook] = useState(emptyBook)
 
    const handleChange = (event) => {
@@ -10,34 +10,31 @@ const Add = (props) => {
    const handleSubmit = (event) => {
       event.preventDefault()
       props.handleCreate(book)
-      setBook({ title: '', author: '', genre: '', year: '', publisher: ''})
    }
 
    return (
       <>
          <form onSubmit={handleSubmit}>
             <label htmlFor="title">Title: </label>
-            <input type="text" name="title" defaultValue={book.title} onChange={handleChange}/>
+            <input type="text" name="title" onChange={handleChange}/>
             <br/>
             <br/>
             <label htmlFor="author">Author: </label>
-            <input type="text" name="author" defaultValue={book.author} onChange={handleChange}/>
+            <input type="text" name="author" onChange={handleChange}/>
             <br/>
             <br/>
             <label htmlFor="genre">Genre: </label>
-            <input type="text" name="genre" defaultValue={book.genre} onChange={handleChange}/>
+            <input type="text" name="genre" onChange={handleChange}/>
             <br/>
             <br/>
             <label htmlFor="year">Year: </label>
-            <input type="number" name="year" defaultValue={book.year} onChange={handleChange}/>
+            <input type="number" name="year" onChange={handleChange}/>
             <br/>
             <br/>
             <label htmlFor="publisher">Publisher: </label>
-            <input type="text" name="publisher" defaultValue={book.publisher} onChange={handleChange}/>
+            <input type="text" name="publisher" onChange={handleChange}/>
             <input type="submit"/>
          </form>
       </>
    )
 }
-
-export default Add
