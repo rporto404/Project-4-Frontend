@@ -15,28 +15,28 @@ const App = () => {
             (response) => setBooks(response.data),
             (err) => console.log(err)
          )
-         .catch((error) => console.log(error))
+   .catch((error) => console.log(error))
    }
    const handleCreate = (addBook) => {
-      axios
-         .post('https://floating-fortress-76589.herokuapp.com/api/books', addBook)
-         .then((response) => {
-            console.log(response)
-            getBooks()
-         })
-   }
-   const handleDelete = (event) => {
-      axios
-         .delete('https://floating-fortress-76589.herokuapp.com/api/books/' + event.target.value)
-         .then((response) => {
-            getBooks()
-         })
+      axios.post('https://floating-fortress-76589.herokuapp.com/api/books', addBook)
+      .then((response) => {
+         setBooks([...books, response.data])
+      })
    }
    const handleUpdate = (editBook) => {
       axios
          .put('https://floating-fortress-76589.herokuapp.com/api/books/' + editBook.id, editBook)
          .then((response) => {
-            getBooks()
+            setBooks(books.map((book) => {
+               return book.id !== response.data.id ? book : response.data
+            }))
+         })
+   }
+   const handleDelete = (event, deletedBook) => {
+      axios
+         .delete('https://floating-fortress-76589.herokuapp.com/api/books/' + event.target.value)
+         .then((response) => {
+            setBooks(books.filter(book => book.id !== deletedBook.id))
          })
    }
 
@@ -47,6 +47,7 @@ const App = () => {
    return (
       <>
          <h1>Books</h1>
+         <Add handleCreate={handleCreate}/>
          {books.map((book) => {
             return (
                <div className="book" key={book.id}>
@@ -55,7 +56,7 @@ const App = () => {
                   <h3>{book.genre}</h3>
                   <h3>{book.year}</h3>
                   <h3>{book.publisher}</h3>
-
+                  <Edit handleUpdate={handleUpdate} id={book.id}/>
                   <button onClick={handleDelete} value={book.id}>
                   X
                   </button>
