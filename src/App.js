@@ -51,25 +51,48 @@ const App = () => {
 
   return (
     <>
-      <h1>List of Books</h1>
-      <Add handleCreate={handleCreate} />
-      <div className="books">
-        {books.map((book) => {
-          return (
-            <div className="book" key={book.id}>
-              <h4>Title: {book.title}</h4>
-              <h5>Author: {book.author}</h5>
-              <h5>Genre: {book.genre}</h5>
-              <h5>Year: {book.year}</h5>
-              <h5>Publisher: {book.publisher}</h5>
-              <Edit handleUpdate={handleUpdate} book={book} />
-              <button onClick={(event) => {handleDelete(event, book)}} value={book.id}>
-                X
-              </button>
-            </div>
-          )
-        })}
+      <div className='jumbotron text-center bg-primary text-dark h-50 p-3'>
+        <h1>List of Books</h1>
       </div>
+      <div className='text-center'>
+        <Add handleCreate={handleCreate} />
+      </div>
+      <div className='container d-flex flex-row flex-nowrap'>
+        <div className='row p-3'>
+          <div className='col-sm border-right text-center'>
+            <h2>API Books</h2>
+            <div>
+              // add the api mapping here
+            </div>
+          </div>
+          <div className="books col-lg border-left text-center">
+            <h2>Personal Books</h2>
+
+            <div className='card-deck d-flex flex-wrap'>
+            {books.map((book) => {
+              return (
+                <div className="card book m-1 w-50" key={book.id}>
+                  <h4>Title: {book.title}</h4>
+                  <h5>Author: {book.author}</h5>
+                  <h5>Genre: {book.genre}</h5>
+                  <h5>Year: {book.year}</h5>
+                  <h5>Publisher: {book.publisher}</h5>
+                  <Edit handleUpdate={handleUpdate} book={book} />
+                  <button onClick={(event) => {handleDelete(event, book)}} value={book.id}>
+                    X
+                  </button>
+                </div>
+              )
+            })}
+              </div>
+            </div>
+          </div>
+      </div>
+      <footer className="bg-primary text-center text-lg-start">
+        <div className="text-center p-3">
+          <p>Created by Ryan Portorreal, Chris Elian and Matt Eckman</p>
+        </div>
+      </footer>
     </>
   )
 }
