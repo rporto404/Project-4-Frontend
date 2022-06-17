@@ -7,6 +7,82 @@
   pointer-events: none;
 }
 
+body{
+  background-color: #001021;
+  color:white;
+}
+
+.card-deck{
+  width: auto;
+  margin: auto;
+  background-image: url('https://www.homestratosphere.com/wp-content/uploads/2021/01/types-of-wood-grain-patterns-Jan272021-5-min-728x409.jpg');
+  border-radius: 10px;
+  margin: 10px;
+  border-bottom: url('https://www.homestratosphere.com/wp-content/uploads/2021/01/types-of-wood-grain-patterns-Jan272021-5-min-728x409.jpg');
+}
+.books{
+  justify-content: space-around;
+}
+hr{
+  border: 1px solid black;
+  opacity:.5;
+  width:90%;
+}
+.book{
+  background-color: #330200;
+  background-image: url("https://www.transparenttextures.com/patterns/leather.png");  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content:space-around;
+  color: white;
+  width: 200px;
+  height:400px;
+  max-width:45%;
+  border-top: 4px solid white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 5px;
+}
+
+.book:hover{
+  cursor: grab;
+}
+.title{
+  margin-bottom: 60px;
+}
+
+
+.edit-delete{
+  justify-content: center;
+  align-items: baseline;
+  align-content:center;
+}
+.btn-warning{
+  color:#001021
+}
+
+/* Drop downs for add/edit */
+details > summary {
+  list-style-type: '➕';
+}
+
+details[open] > summary {
+  list-style-type: '🔽';
+}
+
+details.edit > summary {
+  list-style-type: none;
+}
+
+details.edit[open] > summary {
+  list-style-type: none;
+}
+
+
+details[open] > summary {
+  margin-bottom: 0.5rem;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

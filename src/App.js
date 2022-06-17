@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Add from './components/Add'
 import Edit from './components/Edit'
+import './App.css'
 
 const App = () => {
   const [books, setBooks] = useState([])
+  const [toggleAddForm, setToggleAddForm] = useState(false)
 
   const getBooks = () => {
     axios
@@ -45,54 +47,65 @@ const App = () => {
     })
   }
 
+  
+
   useEffect(() => {
     getBooks()
   }, [])
 
   return (
     <>
-      <div className='jumbotron text-center bg-primary text-dark h-50 p-3'>
-        <h1>List of Books</h1>
+      <div className='jumbotron text-center bg-secondary h-50 p-3'>
+        <h1 >Pages for Ages</h1>
       </div>
-      <div className='text-center'>
-        <Add handleCreate={handleCreate} />
+
+      <div className='d-flex flex-row text-center'>  
+        <Add handleCreate={handleCreate}/>  
       </div>
-      <div className='container d-flex flex-row flex-nowrap'>
+
+      <div className='container d-flex flex-row flex-nowrap w-80% justify-content-center'>
         <div className='row p-3'>
-          <div className='col-sm border-right text-center'>
+          <div className='border-right text-center'>
             <h2>API Books</h2>
             <div>
-              // add the api mapping here
+                // add the api mapping here
             </div>
           </div>
-          <div className="books col-lg border-left text-center">
+          <div className="books border-left text-center">
             <h2>Personal Books</h2>
-
-            <div className='card-deck d-flex flex-wrap'>
-            {books.map((book) => {
-              return (
-                <div className="card book m-1 w-50" key={book.id}>
-                  <h4>Title: {book.title}</h4>
-                  <h5>Author: {book.author}</h5>
-                  <h5>Genre: {book.genre}</h5>
-                  <h5>Year: {book.year}</h5>
-                  <h5>Publisher: {book.publisher}</h5>
-                  <Edit handleUpdate={handleUpdate} book={book} />
-                  <button onClick={(event) => {handleDelete(event, book)}} value={book.id}>
-                    X
-                  </button>
-                </div>
-              )
-            })}
-              </div>
+            <div className='card-deck d-flex'>
+              {books.map((book) => {
+                return (
+                  <div className="book" key={book.id}>
+                    {/* <p className='m-0'></p> */}
+                    <div>
+                    <hr></hr>
+                    <h3 className='title'><i>'{book.title}'</i></h3>
+                    <hr></hr>
+                    <h5 className='author'>{book.author}</h5>
+                    <hr></hr>
+                    <h6>{book.genre}</h6>
+                    <h6>{book.publisher},{book.year}</h6>
+                    <hr></hr>
+                    </div>
+                    <div className='d-flex edit-delete'>
+                     <button className='btn btn-warning'><Edit handleUpdate={handleUpdate} book={book}/></button>
+                     <button className='lnr lnr-trash btn btn-danger' onClick={(event) => {handleDelete(event, book)}} value={book.id}></button>
+                    </div>
+                  </div>
+                )
+              })}
             </div>
           </div>
+        </div>
       </div>
-      <footer className="bg-primary text-center text-lg-start">
+
+      <footer className="bg-secondary text-center text-lg-start">
         <div className="text-center p-3">
           <p>Created by Ryan Portorreal, Chris Elian and Matt Eckman</p>
         </div>
       </footer>
+
     </>
   )
 }
