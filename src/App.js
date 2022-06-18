@@ -47,6 +47,10 @@ const App = () => {
     })
   }
 
+  const setBookColor = () => {
+    Math.floor(Math.random()*16777215)
+  }
+  
   
 
   useEffect(() => {
@@ -56,7 +60,7 @@ const App = () => {
   return (
     <>
       <div className='jumbotron text-center bg-secondary h-50 p-3'>
-        <h1 >Pages for Ages</h1>
+        <h1>Pages for Ages</h1>
       </div>
 
       <div className='d-flex flex-row text-center'>  
@@ -65,31 +69,25 @@ const App = () => {
 
       <div className='container d-flex flex-row flex-nowrap w-80% justify-content-center'>
         <div className='row p-3'>
-          <div className='border-right text-center'>
-            <h2>API Books</h2>
-            <div>
-                // add the api mapping here
-            </div>
-          </div>
-          <div className="books border-left text-center">
+          <div className="books text-center">
             <h2>Personal Books</h2>
             <div className='card-deck d-flex'>
               {books.map((book) => {
                 return (
                   <div className="book" key={book.id}>
                     {/* <p className='m-0'></p> */}
-                    <div>
+                    <div className='spine'>
                     <hr></hr>
                     <h3 className='title'><i>'{book.title}'</i></h3>
                     <hr></hr>
                     <h5 className='author'>{book.author}</h5>
                     <hr></hr>
                     <h6>{book.genre}</h6>
-                    <h6>{book.publisher},{book.year}</h6>
+                    <h6>{book.publisher}, {book.year}</h6>
                     <hr></hr>
                     </div>
-                    <div className='d-flex edit-delete'>
-                     <button className='btn btn-warning'><Edit handleUpdate={handleUpdate} book={book}/></button>
+                    <div className='btn-group justify-content-center align-items-end' role='group'>
+                     <button className='lnr lnr-pencil btn btn-warning'><Edit handleUpdate={handleUpdate} book={book}/></button>
                      <button className='lnr lnr-trash btn btn-danger' onClick={(event) => {handleDelete(event, book)}} value={book.id}></button>
                     </div>
                   </div>
@@ -97,12 +95,23 @@ const App = () => {
               })}
             </div>
           </div>
+          
         </div>
       </div>
-
-      <footer className="bg-secondary text-center text-lg-start">
+      <div className='text-center'>
+        <h2>API Books</h2>
+        <div>
+                // add the api mapping here
+        </div>
+      </div>
+      <footer className="bg-light text-dark text-center text-lg-start">
         <div className="text-center p-3">
-          <p>Created by Ryan Portorreal, Chris Elian and Matt Eckman</p>
+          <p>Created by</p>
+          <div className='d-flex flex-row justify-content-around'>
+            <h5><a href="https://github.com/rporto404" target='_blank'><i class="devicon-github-original colored"></i></a>Ryan Portorreal<a href="https://www.linkedin.com/in/ryan-portorreal/"target='_blank'><i class="devicon-linkedin-plain colored"></i></a></h5> 
+            <h5><a href="https://github.com/chriselian8" target='_blank'><i class="devicon-github-original colored"></i></a>Chris Elian<a href="https://www.linkedin.com/in/christopher-elian/"target='_blank'><i class="devicon-linkedin-plain colored"></i></a></h5>
+            <h5><a href="https://github.com/eckmanmatt" target='_blank'><i class="devicon-github-original colored"></i></a>Matt Eckman<a href="https://www.linkedin.com/in/mattheweckman/"target='_blank'><i class="devicon-linkedin-plain colored"></i></a></h5>
+          </div>
         </div>
       </footer>
 
