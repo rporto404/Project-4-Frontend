@@ -14,8 +14,8 @@ const Edit = (props) => {
 
   return (
     <>
-      <details className='edit'>
-        <summary></summary>
+      <details>
+        <summary>Edit Book</summary>
         <form onSubmit={handleSubmit}>
           <label htmlFor="title">Title: </label>
           <input
