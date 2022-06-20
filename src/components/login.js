@@ -99,7 +99,7 @@ const Login = (props) => {
       </> :
       <>
         <div>
-          <button onClick={handleShowLogin}>Show Create Account</button>
+          <button onClick={handleShowLogin}>Create Account</button>
           <h1>Sign In To Account</h1>
           <form onSubmit={handleLogin}>
             <label htmlFor='email'>Email:</label>
