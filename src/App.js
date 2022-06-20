@@ -2,19 +2,14 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Add from './components/add'
 import Edit from './components/edit'
-<<<<<<< HEAD
 import Login from './components/login'
-=======
 import Search from './components/search'
->>>>>>> cd17e910acb8919e9ee3db1e3bf57c3d16edd6b3
 import './App.css'
 
 const App = () => {
   const [books, setBooks] = useState([])
   const [toggleAddForm, setToggleAddForm] = useState(false)
-<<<<<<< HEAD
   const [toggleLoggedIn, setToggleLoggedIn] = useState(false)
-=======
   const [data, setData] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -22,7 +17,6 @@ const App = () => {
   const [searchResults, setSearchResults] = useState([])
 
   let array = data.docs
->>>>>>> cd17e910acb8919e9ee3db1e3bf57c3d16edd6b3
 
   const getBooks = () => {
     axios
@@ -79,13 +73,9 @@ const App = () => {
       }
   }
 
-<<<<<<< HEAD
-
-=======
   // const setBookColor = () => {
   //   Math.floor(Math.random()*16777215)
   // }
->>>>>>> cd17e910acb8919e9ee3db1e3bf57c3d16edd6b3
 
   useEffect(() => {
     getBooks()
@@ -111,12 +101,9 @@ const App = () => {
         <h3 className='subHeader'> A Personal Library and Tolkien Database</h3>
       </div>
 
-<<<<<<< HEAD
       <Login setToggleLoggedIn={setToggleLoggedIn} />
       {toggleLoggedIn ?
       <>
-=======
->>>>>>> cd17e910acb8919e9ee3db1e3bf57c3d16edd6b3
       <div className='d-flex flex-row text-center'>
         <Add handleCreate={handleCreate}/>
       </div>
