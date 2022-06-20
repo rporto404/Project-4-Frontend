@@ -2,7 +2,7 @@
 
 ## Digital Book Library
 
-###Ryan Portorreal, Chris Elian and Matt Eckman
+### Ryan Portorreal, Chris Elian and Matt Eckman
 
 #### What went well for our group?
 Learned a lot when it came to authentication, 3rd party API and styling.
