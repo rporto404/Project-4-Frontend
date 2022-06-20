@@ -122,7 +122,7 @@ const App = () => {
                     <hr></hr>
                     </div>
                     <div className='btn-group justify-content-center align-items-end' role='group'>
-                     <button className='lnr lnr-pencil btn btn-warning'><Edit handleUpdate={handleUpdate} book={book}/></button>
+                     <button className='lnr lnr-pencil btn btn-warning edit'><Edit handleUpdate={handleUpdate} book={book}/></button>
                      <button className='lnr lnr-trash btn btn-danger' onClick={(event) => {handleDelete(event, book)}} value={book.id}></button>
                     </div>
                   </div>
