@@ -2,11 +2,19 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Add from './components/add'
 import Edit from './components/edit'
+import Search from './components/search'
 import './App.css'
 
 const App = () => {
   const [books, setBooks] = useState([])
   const [toggleAddForm, setToggleAddForm] = useState(false)
+  const [data, setData] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [search, setSearch] = useState('')
+  const [searchResults, setSearchResults] = useState([])
+
+  let array = data.docs
 
   const getBooks = () => {
     axios
@@ -47,15 +55,42 @@ const App = () => {
     })
   }
 
+  const searchHandler = (search) => {
+      setSearch(search)
+      if(search !== ''){
+         const newBookList = array.filter((bookResult) => {
+            return Object.values(bookResult)
+            .join(' ')
+            .toLowerCase()
+            .includes(search.toLowerCase())
+
+         })
+         setSearchResults(newBookList)
+      } else {
+         setSearchResults(array)
+      }
+  }
+
   const setBookColor = () => {
     Math.floor(Math.random()*16777215)
   }
-  
-  
 
   useEffect(() => {
     getBooks()
   }, [])
+
+  useEffect(() => {
+    setLoading(true)
+    fetch(`http://openlibrary.org/search.json?author=tolkien`)
+    .then((response) => response.json())
+    .then((data) => setData(data))
+    .then(() => setLoading())
+    .catch(setError)
+  }, [])
+
+  if(error){
+    return <pre>{JSON.stringify(error, null, 2)}</pre>
+  }
 
   return (
     <>
@@ -63,8 +98,8 @@ const App = () => {
         <h1>Pages for Ages</h1>
       </div>
 
-      <div className='d-flex flex-row text-center'>  
-        <Add handleCreate={handleCreate}/>  
+      <div className='d-flex flex-row text-center'>
+        <Add handleCreate={handleCreate}/>
       </div>
 
       <div className='container d-flex flex-row flex-nowrap w-80% justify-content-center'>
@@ -95,20 +130,37 @@ const App = () => {
               })}
             </div>
           </div>
-          
+
         </div>
       </div>
       <div className='text-center'>
         <h2>API Books</h2>
         <div>
-                // add the api mapping here
+        <Search term={search} searchKeyword={searchHandler}/>
+           {search.length < 1 ?
+             null
+           :
+           <ul>
+              {searchResults.map((item, i, a, b, c) => {
+                 return (
+                  <>
+                     <div className="card text-primary">
+                       <li key={i}>{item.title}</li>
+                       <li key={a}>{item.author_name}</li>
+                       <li key={b}>{item.first_publish_year}</li>
+                     </div>
+                  </>
+               )
+              })}
+           </ul>
+           }
         </div>
       </div>
       <footer className="bg-light text-dark text-center text-lg-start">
         <div className="text-center p-3">
           <p>Created by</p>
           <div className='d-flex flex-row justify-content-around'>
-            <h5><a href="https://github.com/rporto404" target='_blank'><i class="devicon-github-original colored"></i></a>Ryan Portorreal<a href="https://www.linkedin.com/in/ryan-portorreal/"target='_blank'><i class="devicon-linkedin-plain colored"></i></a></h5> 
+            <h5><a href="https://github.com/rporto404" target='_blank'><i class="devicon-github-original colored"></i></a>Ryan Portorreal<a href="https://www.linkedin.com/in/ryan-portorreal/"target='_blank'><i class="devicon-linkedin-plain colored"></i></a></h5>
             <h5><a href="https://github.com/chriselian8" target='_blank'><i class="devicon-github-original colored"></i></a>Chris Elian<a href="https://www.linkedin.com/in/christopher-elian/"target='_blank'><i class="devicon-linkedin-plain colored"></i></a></h5>
             <h5><a href="https://github.com/eckmanmatt" target='_blank'><i class="devicon-github-original colored"></i></a>Matt Eckman<a href="https://www.linkedin.com/in/mattheweckman/"target='_blank'><i class="devicon-linkedin-plain colored"></i></a></h5>
           </div>
