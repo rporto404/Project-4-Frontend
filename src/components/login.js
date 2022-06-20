@@ -10,9 +10,12 @@ const Login = (props) => {
 
   const handleSubmitNew = (event) => {
     event.preventDefault()
-    axios.post('http://localhost:8000/api/useraccount', {
+    axios.post('https://floating-fortress-76589.herokuapp.com/api/useraccount', {
       email: email,
       password: pass,
+    }).catch((error) => {
+      console.log('Failed to Create New Account')
+      return
     }).then((response) => {
       console.log('Created New Account with ' + email);
     })
@@ -20,7 +23,7 @@ const Login = (props) => {
 
   const handleLogin = (event) => {
     event.preventDefault()
-    axios.put('http://localhost:8000/api/useraccount/login', {
+    axios.put('https://floating-fortress-76589.herokuapp.com/api/useraccount/login', {
       email: email,
       password: pass,
     }).catch((error) => {
@@ -48,7 +51,7 @@ const Login = (props) => {
       console.log('No User to Delete');
       return
     } else {
-      axios.delete(`http://localhost:8000/api/useraccount/${userId}`)
+      axios.delete(`https://floating-fortress-76589.herokuapp.com/api/useraccount/${userId}`)
       console.log('User Deleted')
       handleLogout()
     }
