@@ -2,9 +2,17 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Add from './components/Add'
 import Edit from './components/Edit'
+import Search from './components/Search'
+import AuthorSearch from './components/AuthorSearch'
 
 const App = () => {
   const [books, setBooks] = useState([])
+  const [data, setData] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [search, setSearch] = useState('')
+  const [searchResults, setSearchResults] = useState([])
+  const [bookAuthor, setBookAuthor] = useState('')
 
   const getBooks = () => {
     axios
@@ -49,6 +57,52 @@ const App = () => {
     getBooks()
   }, [])
 
+  useEffect(() => {
+     setLoading(true)
+     fetch(`http://openlibrary.org/search.json?author=${bookAuthor}`)
+     .then((response) => response.json())
+     .then((data) => setData(data))
+     .then(() => setLoading())
+     .catch(setError)
+  }, [])
+
+  const bookAuthorHandler = (e) => {
+     setBookAuthor(e.target.value)
+  }
+
+  if(loading) {
+     return <h1>Loading...</h1>
+  }
+
+  if(error){
+    return <pre>{JSON.stringify(error, null, 2)}</pre>
+}
+   if(!data){
+      return null
+   }
+
+   let array = data.docs
+
+   const authorSearchHandler = (search) => {
+
+   }
+
+   const searchHandler = (search) => {
+      setSearch(search)
+      if(search !== ''){
+         const newBookList = array.filter((bookResult) => {
+            return Object.values(bookResult)
+            .join(' ')
+            .toLowerCase()
+            .includes(search.toLowerCase())
+
+         })
+         setSearchResults(newBookList)
+      } else {
+         setSearchResults(array)
+      }
+   }
+
   return (
     <>
       <h1>List of Books</h1>
@@ -69,6 +123,27 @@ const App = () => {
             </div>
           )
         })}
+      </div>
+      <div>
+         <AuthorSearch bookAuthorHandler={bookAuthorHandler} bookAuthor={bookAuthor}/>
+         <Search term={search} searchKeyword={searchHandler}/>
+         {search.length < 1 ?
+         <ul>
+            {array.map((item, i) => {
+               return (
+               <li key={i}>{item.title}</li>
+            )
+            })}
+         </ul>
+         :
+         <ul>
+            {searchResults.map((item, i) => {
+               return (
+               <li key={i}>{item.title}</li>
+            )
+            })}
+         </ul>
+         }
       </div>
     </>
   )
