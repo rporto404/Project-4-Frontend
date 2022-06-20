@@ -37,7 +37,6 @@ const Login = (props) => {
         setUserId(response.data.id)
         setHideAccount(!hideAccount)
         console.log('Logged in with ' + email)
-        alert(`Logged in with ` + email + `!`)
         props.setToggleLoggedIn(true)
       }
     })
@@ -58,7 +57,6 @@ const Login = (props) => {
     } else {
       axios.delete(`https://floating-fortress-76589.herokuapp.com/api/useraccount/${userId}`)
       console.log('User Deleted.')
-      alert(`User deleted.`)
       handleLogout()
     }
   }
