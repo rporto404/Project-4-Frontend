@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import Add from './components/Add'
-import Edit from './components/Edit'
+import Add from './components/add'
+import Edit from './components/edit'
 import './App.css'
 
 const App = () => {
