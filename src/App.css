@@ -11,14 +11,20 @@ body{
   background-color: #001021;
   color:white;
 }
+ul{
+  list-style-type: none;
+}
 
-.card-deck{
+footer{
+  margin-top: 200px;
+}
+
+.shelf{
   width: auto;
   margin: auto;
   background-image: url('https://www.homestratosphere.com/wp-content/uploads/2021/01/types-of-wood-grain-patterns-Jan272021-5-min-728x409.jpg');
   border-radius: 10px;
   margin: 10px;
-  border-bottom: url('https://www.homestratosphere.com/wp-content/uploads/2021/01/types-of-wood-grain-patterns-Jan272021-5-min-728x409.jpg');
 }
 .books{
   justify-content: space-around;
@@ -81,12 +87,22 @@ details.edit > summary {
 }
 
 details.edit[open] > summary {
-  list-style-type: none;
+  list-style-type: 🔽;
 }
-
 
 details[open] > summary {
   margin-bottom: 0.5rem;
+}
+.titleDiv{
+background-color: #034748;
+}
+.header{
+  font-family: 'Tai Heritage Pro',fantasy;
+  font-weight: bold;
+  font-size: 72px;
+}
+.subHeader{
+  font-family: 'Tai Heritage Pro',cursive;
 }
 
 @media (prefers-reduced-motion: no-preference) {

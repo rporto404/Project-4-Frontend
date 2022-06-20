@@ -2,13 +2,27 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Add from './components/add'
 import Edit from './components/edit'
+<<<<<<< HEAD
 import Login from './components/login'
+=======
+import Search from './components/search'
+>>>>>>> cd17e910acb8919e9ee3db1e3bf57c3d16edd6b3
 import './App.css'
 
 const App = () => {
   const [books, setBooks] = useState([])
   const [toggleAddForm, setToggleAddForm] = useState(false)
+<<<<<<< HEAD
   const [toggleLoggedIn, setToggleLoggedIn] = useState(false)
+=======
+  const [data, setData] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [search, setSearch] = useState('')
+  const [searchResults, setSearchResults] = useState([])
+
+  let array = data.docs
+>>>>>>> cd17e910acb8919e9ee3db1e3bf57c3d16edd6b3
 
   const getBooks = () => {
     axios
@@ -49,25 +63,60 @@ const App = () => {
     })
   }
 
-  const setBookColor = () => {
-    Math.floor(Math.random()*16777215)
+  const searchHandler = (search) => {
+      setSearch(search)
+      if(search !== ''){
+         const newBookList = array.filter((bookResult) => {
+            return Object.values(bookResult)
+            .join(' ')
+            .toLowerCase()
+            .includes(search.toLowerCase())
+
+         })
+         setSearchResults(newBookList)
+      } else {
+         setSearchResults(array)
+      }
   }
 
+<<<<<<< HEAD
 
+=======
+  // const setBookColor = () => {
+  //   Math.floor(Math.random()*16777215)
+  // }
+>>>>>>> cd17e910acb8919e9ee3db1e3bf57c3d16edd6b3
 
   useEffect(() => {
     getBooks()
   }, [])
 
+  useEffect(() => {
+    setLoading(true)
+    fetch(`http://openlibrary.org/search.json?author=tolkien`)
+    .then((response) => response.json())
+    .then((data) => setData(data))
+    .then(() => setLoading())
+    .catch(setError)
+  }, [])
+
+  if(error){
+    return <pre>{JSON.stringify(error, null, 2)}</pre>
+  }
+
   return (
     <>
-      <div className='jumbotron text-center bg-secondary h-50 p-3'>
-        <h1>Pages for Ages</h1>
+      <div className='titleDiv jumbotron text-center bg-secondary h-50 p-3'>
+        <h1 className='header'>Pages for Ages</h1>
+        <h3 className='subHeader'> A Personal Library and Tolkien Database</h3>
       </div>
 
+<<<<<<< HEAD
       <Login setToggleLoggedIn={setToggleLoggedIn} />
       {toggleLoggedIn ?
       <>
+=======
+>>>>>>> cd17e910acb8919e9ee3db1e3bf57c3d16edd6b3
       <div className='d-flex flex-row text-center'>
         <Add handleCreate={handleCreate}/>
       </div>
@@ -76,7 +125,7 @@ const App = () => {
         <div className='row p-3'>
           <div className="books text-center">
             <h2>Personal Books</h2>
-            <div className='card-deck d-flex'>
+            <div className='card-deck shelf d-flex'>
               {books.map((book) => {
                 return (
                   <div className="book" key={book.id}>
@@ -92,7 +141,7 @@ const App = () => {
                     <hr></hr>
                     </div>
                     <div className='btn-group justify-content-center align-items-end' role='group'>
-                     <button className='lnr lnr-pencil btn btn-warning'><Edit handleUpdate={handleUpdate} book={book}/></button>
+                     <button className='lnr lnr-pencil btn btn-warning edit'><Edit handleUpdate={handleUpdate} book={book}/></button>
                      <button className='lnr lnr-trash btn btn-danger' onClick={(event) => {handleDelete(event, book)}} value={book.id}></button>
                     </div>
                   </div>
@@ -103,11 +152,34 @@ const App = () => {
 
         </div>
       </div>
-      <div className='text-center'>
-        <h2>API Books</h2>
-        <div>
-                // add the api mapping here
-        </div>
+      <div className='container d-flex flex-row flex-nowrap w-80% justify-content-center'>
+        <div className='row p-3'>
+          <div className="books text-center flex-row">
+            <h2>API Books</h2>
+            <Search term={search} searchKeyword={searchHandler}/>
+            <div>
+                {search.length < 1 ?
+                  null
+                    :
+                      <div className= 'card-deck shelf d-flex'>
+                        {searchResults.map((item, i, a, b, c) => {
+                          return (
+                            <>
+                              <ul className="card spine book text-primary results">
+                                <li key={i}>{item.title}</li>
+                                <hr></hr>
+                                <li key={a}>{item.author_name}</li>
+                                <hr></hr>
+                                <li key={b}>{item.first_publish_year}</li>
+                              </ul>
+                            </>
+                                  )
+                        })}
+                      </div>
+                }
+              </div>
+            </div>
+          </div>
       </div>
       </>
       : '' }
