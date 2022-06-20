@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Add from './components/add'
 import Edit from './components/edit'
+import Login from './components/login'
 import './App.css'
 
 const App = () => {
   const [books, setBooks] = useState([])
   const [toggleAddForm, setToggleAddForm] = useState(false)
+  const [toggleLoggedIn, setToggleLoggedIn] = useState(false)
 
   const getBooks = () => {
     axios
@@ -50,8 +52,8 @@ const App = () => {
   const setBookColor = () => {
     Math.floor(Math.random()*16777215)
   }
-  
-  
+
+
 
   useEffect(() => {
     getBooks()
@@ -63,8 +65,11 @@ const App = () => {
         <h1>Pages for Ages</h1>
       </div>
 
-      <div className='d-flex flex-row text-center'>  
-        <Add handleCreate={handleCreate}/>  
+      <Login setToggleLoggedIn={setToggleLoggedIn} />
+      {toggleLoggedIn ?
+      <>
+      <div className='d-flex flex-row text-center'>
+        <Add handleCreate={handleCreate}/>
       </div>
 
       <div className='container d-flex flex-row flex-nowrap w-80% justify-content-center'>
@@ -95,7 +100,7 @@ const App = () => {
               })}
             </div>
           </div>
-          
+
         </div>
       </div>
       <div className='text-center'>
@@ -104,11 +109,14 @@ const App = () => {
                 // add the api mapping here
         </div>
       </div>
+      </>
+      : '' }
+
       <footer className="bg-light text-dark text-center text-lg-start">
         <div className="text-center p-3">
           <p>Created by</p>
           <div className='d-flex flex-row justify-content-around'>
-            <h5><a href="https://github.com/rporto404" target='_blank'><i class="devicon-github-original colored"></i></a>Ryan Portorreal<a href="https://www.linkedin.com/in/ryan-portorreal/"target='_blank'><i class="devicon-linkedin-plain colored"></i></a></h5> 
+            <h5><a href="https://github.com/rporto404" target='_blank'><i class="devicon-github-original colored"></i></a>Ryan Portorreal<a href="https://www.linkedin.com/in/ryan-portorreal/"target='_blank'><i class="devicon-linkedin-plain colored"></i></a></h5>
             <h5><a href="https://github.com/chriselian8" target='_blank'><i class="devicon-github-original colored"></i></a>Chris Elian<a href="https://www.linkedin.com/in/christopher-elian/"target='_blank'><i class="devicon-linkedin-plain colored"></i></a></h5>
             <h5><a href="https://github.com/eckmanmatt" target='_blank'><i class="devicon-github-original colored"></i></a>Matt Eckman<a href="https://www.linkedin.com/in/mattheweckman/"target='_blank'><i class="devicon-linkedin-plain colored"></i></a></h5>
           </div>
