@@ -59,7 +59,7 @@ const App = () => {
 
   useEffect(() => {
      setLoading(true)
-     fetch(`http://openlibrary.org/search.json?author=${bookAuthor}`)
+     fetch(`http://openlibrary.org/search.json?author=tolkien`)
      .then((response) => response.json())
      .then((data) => setData(data))
      .then(() => setLoading())
@@ -129,9 +129,13 @@ const App = () => {
          <Search term={search} searchKeyword={searchHandler}/>
          {search.length < 1 ?
          <ul>
-            {array.map((item, i) => {
+            {array.map((item, i, a, b, c) => {
                return (
-               <li key={i}>{item.title}</li>
+                  <>
+                     <li key={i}>{item.title}</li>
+                     <li key={a}>{item.author_name}</li>
+                     <li key={b}>{item.first_publish_year}</li>
+                  </>
             )
             })}
          </ul>
