@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Add from './components/add'
 import Edit from './components/edit'
+import Login from './components/login'
 import Search from './components/search'
 import './App.css'
 
 const App = () => {
   const [books, setBooks] = useState([])
   const [toggleAddForm, setToggleAddForm] = useState(false)
+  const [toggleLoggedIn, setToggleLoggedIn] = useState(false)
   const [data, setData] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -99,6 +101,9 @@ const App = () => {
         <h3 className='subHeader'> A Personal Library and Tolkien Database</h3>
       </div>
 
+      <Login setToggleLoggedIn={setToggleLoggedIn} />
+      {toggleLoggedIn ?
+      <>
       <div className='d-flex flex-row text-center'>
         <Add handleCreate={handleCreate}/>
       </div>
@@ -163,6 +168,9 @@ const App = () => {
             </div>
           </div>
       </div>
+      </>
+      : '' }
+
       <footer className="bg-light text-dark text-center text-lg-start">
         <div className="text-center p-3">
           <p>Created by</p>
