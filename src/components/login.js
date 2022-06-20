@@ -15,9 +15,11 @@ const Login = (props) => {
       password: pass,
     }).catch((error) => {
       console.log('Failed to Create New Account')
+      alert('Failed to create new account.')
       return
     }).then((response) => {
       console.log('Created New Account with ' + email);
+      alert(`Created new account with ` + email + `!`)
     })
   }
 
@@ -28,12 +30,14 @@ const Login = (props) => {
       password: pass,
     }).catch((error) => {
       console.log('Log in Failed')
+      alert(`User account doesn't exist/incorrect details. Please try again!`)
       return
     }).then((response) => {
       if (response) {
         setUserId(response.data.id)
         setHideAccount(!hideAccount)
         console.log('Logged in with ' + email)
+        alert(`Logged in with ` + email + `!`)
         props.setToggleLoggedIn(true)
       }
     })
@@ -48,11 +52,13 @@ const Login = (props) => {
   const handleDelete = (event) => {
     event.preventDefault()
     if (userId === '') {
-      console.log('No User to Delete');
+      console.log('No User to Delete')
+      alert('No user to delete.')
       return
     } else {
       axios.delete(`https://floating-fortress-76589.herokuapp.com/api/useraccount/${userId}`)
-      console.log('User Deleted')
+      console.log('User Deleted.')
+      alert(`User deleted.`)
       handleLogout()
     }
   }
@@ -82,7 +88,7 @@ const Login = (props) => {
             />
             <label htmlFor='password'>Password:</label>
             <input
-              type='text'
+              type='password'
               id='password'
               autoComplete='off'
               onChange={(event) => {setPass(event.target.value)}}
@@ -109,7 +115,7 @@ const Login = (props) => {
             />
             <label htmlFor='password'>Password:</label>
             <input
-              type='text'
+              type='password'
               id='password'
               autoComplete='off'
               onChange={(event) => {setPass(event.target.value)}}
