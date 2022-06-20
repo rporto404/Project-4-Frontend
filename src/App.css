@@ -81,9 +81,8 @@ details.edit > summary {
 }
 
 details.edit[open] > summary {
-  list-style-type: none;
+  list-style-type: 🔽;
 }
-
 
 details[open] > summary {
   margin-bottom: 0.5rem;
