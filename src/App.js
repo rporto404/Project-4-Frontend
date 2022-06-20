@@ -71,9 +71,9 @@ const App = () => {
       }
   }
 
-  const setBookColor = () => {
-    Math.floor(Math.random()*16777215)
-  }
+  // const setBookColor = () => {
+  //   Math.floor(Math.random()*16777215)
+  // }
 
   useEffect(() => {
     getBooks()
@@ -94,8 +94,9 @@ const App = () => {
 
   return (
     <>
-      <div className='jumbotron text-center bg-secondary h-50 p-3'>
-        <h1>Pages for Ages</h1>
+      <div className='titleDiv jumbotron text-center bg-secondary h-50 p-3'>
+        <h1 className='header'>Pages for Ages</h1>
+        <h3 className='subHeader'> A Personal Library and Tolkien Database</h3>
       </div>
 
       <div className='d-flex flex-row text-center'>
@@ -106,7 +107,7 @@ const App = () => {
         <div className='row p-3'>
           <div className="books text-center">
             <h2>Personal Books</h2>
-            <div className='card-deck d-flex'>
+            <div className='card-deck shelf d-flex'>
               {books.map((book) => {
                 return (
                   <div className="book" key={book.id}>
@@ -133,28 +134,34 @@ const App = () => {
 
         </div>
       </div>
-      <div className='text-center'>
-        <h2>API Books</h2>
-        <div>
-        <Search term={search} searchKeyword={searchHandler}/>
-           {search.length < 1 ?
-             null
-           :
-           <ul>
-              {searchResults.map((item, i, a, b, c) => {
-                 return (
-                  <>
-                     <div className="card text-primary">
-                       <li key={i}>{item.title}</li>
-                       <li key={a}>{item.author_name}</li>
-                       <li key={b}>{item.first_publish_year}</li>
-                     </div>
-                  </>
-               )
-              })}
-           </ul>
-           }
-        </div>
+      <div className='container d-flex flex-row flex-nowrap w-80% justify-content-center'>
+        <div className='row p-3'>
+          <div className="books text-center flex-row">
+            <h2>API Books</h2>
+            <Search term={search} searchKeyword={searchHandler}/>
+            <div>
+                {search.length < 1 ?
+                  null
+                    :
+                      <div className= 'card-deck shelf d-flex'>
+                        {searchResults.map((item, i, a, b, c) => {
+                          return (
+                            <>
+                              <ul className="card spine book text-primary results">
+                                <li key={i}>{item.title}</li>
+                                <hr></hr>
+                                <li key={a}>{item.author_name}</li>
+                                <hr></hr>
+                                <li key={b}>{item.first_publish_year}</li>
+                              </ul>
+                            </>
+                                  )
+                        })}
+                      </div>
+                }
+              </div>
+            </div>
+          </div>
       </div>
       <footer className="bg-light text-dark text-center text-lg-start">
         <div className="text-center p-3">
