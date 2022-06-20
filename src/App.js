@@ -83,7 +83,7 @@ const App = () => {
 
   useEffect(() => {
     setLoading(true)
-    fetch(`http://openlibrary.org/search.json?author=tolkien`)
+    fetch(`https://openlibrary.org/search.json?author=tolkien`)
     .then((response) => response.json())
     .then((data) => setData(data))
     .then(() => setLoading())
