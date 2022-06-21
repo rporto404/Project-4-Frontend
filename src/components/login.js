@@ -14,12 +14,15 @@ const Login = (props) => {
       email: email,
       password: pass,
     }).catch((error) => {
-      console.log('Failed to Create New Account')
-      alert('Failed to create new account.')
-      return
+      if (error) {
+        console.log('Failed to Create New Account')
+        alert('Failed to create new account.')
+      }
     }).then((response) => {
-      console.log('Created New Account with ' + email);
-      alert(`Created new account with ` + email + `!`)
+      if (response) {
+        console.log('Created New Account with ' + email);
+        alert(`Created new account with ` + email + `!`)
+      }
     })
   }
 
@@ -29,9 +32,10 @@ const Login = (props) => {
       email: email,
       password: pass,
     }).catch((error) => {
-      console.log('Log in Failed')
-      alert(`User account doesn't exist/incorrect details. Please try again!`)
-      return
+      if (error) {
+        console.log('Log in Failed')
+        alert(`User account doesn't exist/incorrect details. Please try again!`)
+      }
     }).then((response) => {
       if (response) {
         setUserId(response.data.id)
