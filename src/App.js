@@ -96,40 +96,44 @@ const App = () => {
 
   return (
     <>
-      <div className='titleDiv jumbotron text-center bg-secondary h-50 p-3'>
+      <div className='titleDiv m-2 text-center bg-secondary h-50 p-3'>
         <h1 className='header'>Pages for Ages</h1>
         <h3 className='subHeader'> A Personal Library and Tolkien Database</h3>
       </div>
-
-      <Login setToggleLoggedIn={setToggleLoggedIn} />
+      <div className="text-center m-auto w-25 p-0">
+        <Login setToggleLoggedIn={setToggleLoggedIn} />
+      </div>
+      <br/>
+      <br/>
       {toggleLoggedIn ?
       <>
-      <div className='d-flex flex-row text-center'>
+      <div className='d-flex m-auto w-50 flex-column text-center border rounded'>
         <Add handleCreate={handleCreate}/>
       </div>
 
-      <div className='container d-flex flex-row flex-nowrap w-80% justify-content-center'>
+      <div className='container d-flex flex-row flex-nowrap w-80% justify-content-center border rounded mt-5 p-2'>
         <div className='row p-3'>
           <div className="books text-center">
+          <br/>
             <h2>Personal Books</h2>
+            <h5>Check out our shared, personalized bookshelf of our favorite books!</h5>
             <div className='card-deck shelf d-flex'>
               {books.map((book) => {
                 return (
                   <div className="book" key={book.id}>
-                    {/* <p className='m-0'></p> */}
                     <div className='spine'>
-                    <hr></hr>
-                    <h3 className='title'><i>'{book.title}'</i></h3>
-                    <hr></hr>
-                    <h5 className='author'>{book.author}</h5>
-                    <hr></hr>
-                    <h6>{book.genre}</h6>
-                    <h6>{book.publisher}, {book.year}</h6>
-                    <hr></hr>
+                      <hr></hr>
+                      <h3 className='title'><i>'{book.title}'</i></h3>
+                      <hr></hr>
+                      <h5 className='author'>{book.author}</h5>
+                      <hr></hr>
+                      <h6>{book.genre}</h6>
+                      <h6>{book.publisher}, {book.year}</h6>
+                      <hr></hr>
                     </div>
                     <div className='btn-group justify-content-center align-items-end' role='group'>
-                     <button className='lnr lnr-pencil btn btn-warning edit'><Edit handleUpdate={handleUpdate} book={book}/></button>
-                     <button className='lnr lnr-trash btn btn-danger' onClick={(event) => {handleDelete(event, book)}} value={book.id}></button>
+                     <button className='lnr btn btn-warning edit h-75'><Edit handleUpdate={handleUpdate} book={book}/></button>
+                     <button className='lnr lnr-trash btn btn-danger h-75' onClick={(event) => {handleDelete(event, book)}} value={book.id}></button>
                     </div>
                   </div>
                 )
@@ -139,10 +143,10 @@ const App = () => {
 
         </div>
       </div>
-      <div className='container d-flex flex-row flex-nowrap w-80% justify-content-center'>
+      <div className='container d-flex flex-row flex-nowrap w-80% justify-content-center mt-5 border rounded'>
         <div className='row p-3'>
           <div className="books text-center flex-row">
-            <h2>API Books</h2>
+            <h2>Tolkien Works</h2>
             <Search term={search} searchKeyword={searchHandler}/>
             <div>
                 {search.length < 1 ?
@@ -152,13 +156,15 @@ const App = () => {
                         {searchResults.map((item, i, a, b, c) => {
                           return (
                             <>
-                              <ul className="card spine book text-primary results">
-                                <li key={i}>{item.title}</li>
-                                <hr></hr>
-                                <li key={a}>{item.author_name}</li>
-                                <hr></hr>
-                                <li key={b}>{item.first_publish_year}</li>
-                              </ul>
+                              <div className="book text-primary results">
+                                <div className='spine'>
+                                  <h3 className='title' key={i}>{item.title}</h3>
+                                  <hr></hr>
+                                  <h5 className='author' key={a}>{item.author_name}</h5>
+                                  <hr></hr>
+                                  <h5 key={b}>{item.first_publish_year}</h5>
+                                </div>
+                              </div>
                             </>
                                   )
                         })}
@@ -175,9 +181,9 @@ const App = () => {
         <div className="text-center p-3">
           <p>Created by</p>
           <div className='d-flex flex-row justify-content-around'>
-            <h5><a href="https://github.com/rporto404" target='_blank'><i class="devicon-github-original colored"></i></a>Ryan Portorreal<a href="https://www.linkedin.com/in/ryan-portorreal/"target='_blank'><i class="devicon-linkedin-plain colored"></i></a></h5>
-            <h5><a href="https://github.com/chriselian8" target='_blank'><i class="devicon-github-original colored"></i></a>Chris Elian<a href="https://www.linkedin.com/in/christopher-elian/"target='_blank'><i class="devicon-linkedin-plain colored"></i></a></h5>
-            <h5><a href="https://github.com/eckmanmatt" target='_blank'><i class="devicon-github-original colored"></i></a>Matt Eckman<a href="https://www.linkedin.com/in/mattheweckman/"target='_blank'><i class="devicon-linkedin-plain colored"></i></a></h5>
+            <h5><a href="https://github.com/rporto404" target='_blank'><i className="devicon-github-original colored"></i></a>Ryan Portorreal<a href="https://www.linkedin.com/in/ryan-portorreal/"target='_blank'><i className="devicon-linkedin-plain colored"></i></a></h5>
+            <h5><a href="https://github.com/chriselian8" target='_blank'><i className="devicon-github-original colored"></i></a>Chris Elian<a href="https://www.linkedin.com/in/christopher-elian/"target='_blank'><i className="devicon-linkedin-plain colored"></i></a></h5>
+            <h5><a href="https://github.com/eckmanmatt" target='_blank'><i className="devicon-github-original colored"></i></a>Matt Eckman<a href="https://www.linkedin.com/in/mattheweckman/"target='_blank'><i className="devicon-linkedin-plain colored"></i></a></h5>
           </div>
         </div>
       </footer>
