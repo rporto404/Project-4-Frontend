@@ -71,11 +71,15 @@ const Login = (props) => {
       <>
       { showLogin ?
       <>
-        <div>
-          <button onClick={handleShowLogin}>Show Login</button>
+        <div className='border'>
+          <button className="btn btn-primary" onClick={handleShowLogin}>Show Login</button>
+          <br/>
+          <br/>
+          <br/>
           <h1>Create A New Account</h1>
-          <form onSubmit={handleSubmitNew}>
-            <label htmlFor='email'>Email:</label>
+          <form className="text-center" onSubmit={handleSubmitNew}>
+            <br/>
+            <br/>
             <input
               type='text'
               id='email'
@@ -83,8 +87,10 @@ const Login = (props) => {
               onChange={(event) => {setEmail(event.target.value)}}
               value={email}
               required
+              placeholder="Username"
             />
-            <label htmlFor='password'>Password:</label>
+            <br/>
+            <br/>
             <input
               type='password'
               id='password'
@@ -92,17 +98,24 @@ const Login = (props) => {
               onChange={(event) => {setPass(event.target.value)}}
               value={pass}
               required
+              placeholder="Password"
             />
-            <button>Create Account</button>
+            <br/>
+            <br/>
+            <button className="btn btn-success">Create Account</button>
           </form>
         </div>
       </> :
       <>
         <div>
-          <button onClick={handleShowLogin}>Create Account</button>
+          <button className="btn btn-primary" onClick={handleShowLogin}>Create Account</button>
+          <br/>
+          <br/>
+          <br/>
           <h1>Sign In To Account</h1>
           <form onSubmit={handleLogin}>
-            <label htmlFor='email'>Email:</label>
+            <br/>
+            <br/>
             <input
               type='text'
               id='email'
@@ -110,8 +123,10 @@ const Login = (props) => {
               onChange={(event) => {setEmail(event.target.value)}}
               value={email}
               required
+              placeholder='Username'
             />
-            <label htmlFor='password'>Password:</label>
+            <br/>
+            <br/>
             <input
               type='password'
               id='password'
@@ -119,18 +134,23 @@ const Login = (props) => {
               onChange={(event) => {setPass(event.target.value)}}
               value={pass}
               required
+              placeholder='Password'
             />
-            <button>Log In</button>
+            <br/>
+            <br/>
+            <button className='btn btn-success'>Log In</button>
           </form>
         </div>
       </>
     }
     </> :
     <>
-      <div>
-        <h5>Logged in with {email}</h5> <br/>
-        <button onClick={handleLogout}>Log Out</button>
-        <button onClick={handleDelete}>Delete Account</button>
+      <div className='border p-0 w-80% rounded m-auto'>
+        <h5 className='p-0 m-0'>Logged in with {email}</h5> <br/>
+        <div className='btn-group p-2'>
+          <button className='btn btn-secondary' onClick={handleLogout}>Log Out</button>
+          <button className='btn btn-danger' onClick={handleDelete}>Delete Account</button>
+        </div>
       </div>
     </>
     }
