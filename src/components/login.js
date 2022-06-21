@@ -75,7 +75,7 @@ const Login = (props) => {
       <>
       { showLogin ?
       <>
-        <div className='border'>
+        <div>
           <button className="btn btn-primary" onClick={handleShowLogin}>Show Login</button>
           <br/>
           <br/>
