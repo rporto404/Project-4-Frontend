@@ -156,7 +156,7 @@ const App = () => {
                         {searchResults.map((item, i, a, b, c) => {
                           return (
                             <>
-                              <div className="book text-primary results">
+                              <div className="book results">
                                 <div className='spine'>
                                   <h3 className='title' key={i}>{item.title}</h3>
                                   <hr></hr>
