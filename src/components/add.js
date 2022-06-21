@@ -19,7 +19,7 @@ const Add = (props) => {
     <div className='d-flex flex-column justify-center m-auto'>
       <details className='color-white'>
         <summary><h3>Add New Book</h3></summary>
-          <form className='d-flex flew-row align-items-center flex-wrap justify-center' onSubmit={handleSubmit}>
+          <form className='d-flex flex-column align-items-center justify-center' onSubmit={handleSubmit}>
             <input className='mx-1' type="text" name="title" value={book.title} placeholder='Title' onChange={handleChange} />
             <br />
             <input className='mx-1' type="text" name="author" value={book.author} placeholder='Author' onChange={handleChange} />
@@ -29,7 +29,6 @@ const Add = (props) => {
             <input className='mx-1' type="text" name="year" value={book.year} placeholder='Year (YYYY)' onChange={handleChange} />
             <br />
             <input className='mx-1' type="text" name="publisher" value={book.publisher} placeholder='Publisher' onChange={handleChange} />
-            <br/>
             <br/>
             <input className='btn btn-success' type="submit"/>
           </form>

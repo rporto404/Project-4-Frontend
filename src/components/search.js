@@ -8,7 +8,10 @@ const Search = ({ term, searchKeyword}) => {
 
    return (
       <>
-         <input type="text" value={term} placeholder="Enter a book name!" onChange={handleSearch}></input>
+        <div>
+          <h5>Search for a Tolkien related keyword!</h5>
+          <input className=''type="text" value={term} placeholder="Search..." onChange={handleSearch}></input>
+         </div>
       </>
    )
 }
